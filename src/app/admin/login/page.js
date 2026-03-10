@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
               </div>
             )}
             <h1 className="text-2xl font-bold text-gray-900 font-['Outfit']">Admin Portal</h1>
-            <p className="text-gray-500 text-sm mt-1">{villageData?.village_name || 'Green Valley'} Panchayat</p>
+            <p className="text-gray-500 text-sm mt-1">{villageData?.village_name || 'Jantralkampa'} Panchayat</p>
           </div>
 
           {error && (

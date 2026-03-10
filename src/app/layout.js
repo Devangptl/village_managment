@@ -1,12 +1,12 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Green Valley Village - Official Website',
-  description: 'Official website of Green Valley Village. Stay updated with news, events, services, and community information.',
-  keywords: 'village, panchayat, green valley, community, government services',
+  title: 'Jantralkampa - Official Website',
+  description: 'Official website of Jantralkampa. Stay updated with news, events, services, and community information.',
+  keywords: 'village, panchayat, Jantralkampa, community, government services',
   openGraph: {
-    title: 'Green Valley Village - Official Website',
-    description: 'Official website of Green Valley Village.',
+    title: 'Jantralkampa - Official Website',
+    description: 'Official website of Jantralkampa.',
     type: 'website',
   },
 };

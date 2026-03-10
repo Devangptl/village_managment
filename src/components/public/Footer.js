@@ -41,7 +41,7 @@ export default function Footer() {
                 🏡
               </div>
               <div>
-                <span className="font-bold text-lg font-['Outfit']">Green Valley</span>
+                <span className="font-bold text-lg font-['Outfit']">Jantralkampa</span>
                 <span className="block text-[10px] font-medium tracking-widest uppercase text-emerald-400">
                   Village Panchayat
                 </span>
@@ -90,7 +90,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Green Valley Village Panchayat. All rights reserved.
+            © {new Date().getFullYear()} Jantralkampa Panchayat. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/admin/login" className="text-gray-500 hover:text-emerald-400 transition-colors">

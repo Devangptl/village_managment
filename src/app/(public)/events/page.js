@@ -1,8 +1,8 @@
 import { query } from '@/lib/db';
 
 export const metadata = {
-  title: 'Events - Green Valley Village',
-  description: 'Upcoming and past events in Green Valley Village.',
+  title: 'Events - Jantralkampa',
+  description: 'Upcoming and past events in Jantralkampa.',
 };
 
 async function getEvents() {

@@ -33,26 +33,26 @@ function AdminSidebar({ isMobileOpen, setIsMobileOpen }) {
       .catch((err) => console.error('Failed to fetch village data', err));
   }, []);
 
-  const handleLogout = async() => {
-         try {
-    await signOut({
-      redirect: false,
-    });
+  const handleLogout = async () => {
+    try {
+      await signOut({
+        redirect: false,
+      });
 
-    // Notify all other open tabs to logout
-    const bc = new BroadcastChannel('auth');
-    bc.postMessage('logout');
-    bc.close();
+      // Notify all other open tabs to logout
+      const bc = new BroadcastChannel('auth');
+      bc.postMessage('logout');
+      bc.close();
 
-    router.push("/admin/login");
-  } catch (error) {
-    setError("Something went wrong");
-  }
+      router.push("/admin/login");
+    } catch (error) {
+      setError("Something went wrong");
+    }
   };
   return (
     <aside className={`admin-sidebar text-white flex flex-col transition-all duration-300 ${collapsed ? 'lg:w-20 w-64' : 'w-64'} h-screen fixed lg:sticky top-0 left-0 z-50 ${isMobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full lg:translate-x-0 lg:shadow-none'}`}>
       {/* Mobile Close Button */}
-      <button 
+      <button
         onClick={() => setIsMobileOpen(false)}
         className="lg:hidden absolute top-4 right-4 p-2 text-white/70 hover:text-white focus:outline-none"
       >
@@ -78,7 +78,7 @@ function AdminSidebar({ isMobileOpen, setIsMobileOpen }) {
           {!collapsed && (
             <div className="min-w-0">
               <span className="font-bold text-sm font-['Outfit'] block truncate">
-                {villageData?.village_name || 'Green Valley'}
+                {villageData?.village_name || 'Jantralkampa'}
               </span>
               <span className="text-[10px] text-emerald-300 uppercase tracking-wider">Admin Panel</span>
             </div>
@@ -92,12 +92,11 @@ function AdminSidebar({ isMobileOpen, setIsMobileOpen }) {
           <Link
             key={link.href}
             href={link.href}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              (link.href === '/admin' && pathname === '/admin') ||
-              (link.href !== '/admin' && pathname.startsWith(link.href))
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${(link.href === '/admin' && pathname === '/admin') ||
+                (link.href !== '/admin' && pathname.startsWith(link.href))
                 ? 'bg-white/15 text-white border-l-3 border-emerald-300'
                 : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
+              }`}
           >
             <span className="text-lg shrink-0">{link.icon}</span>
             {!collapsed && <span>{link.label}</span>}
@@ -165,19 +164,19 @@ function AdminLayoutInner({ children }) {
     <div className="flex min-h-screen bg-gray-50">
       {/* Mobile Sidebar Overlay */}
       {isMobileOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
 
       <AdminSidebar isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
-      
+
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile Header indicator */}
         <div className="lg:hidden flex items-center justify-between p-4 bg-white border-b sticky top-0 z-30 shadow-sm">
           <div className="font-bold text-emerald-800 text-lg">Admin Panel</div>
-          <button 
+          <button
             onClick={() => setIsMobileOpen(true)}
             className="p-2 -mr-2 text-gray-600 hover:bg-emerald-50 rounded-lg transition-colors focus:outline-none"
           >
@@ -186,7 +185,7 @@ function AdminLayoutInner({ children }) {
             </svg>
           </button>
         </div>
-        
+
         <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
           {children}
         </main>

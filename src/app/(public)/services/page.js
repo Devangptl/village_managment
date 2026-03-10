@@ -1,8 +1,8 @@
 import { query } from '@/lib/db';
 
 export const metadata = {
-  title: 'Services - Green Valley Village',
-  description: 'Government services and schemes available at Green Valley Village Panchayat.',
+  title: 'Services - Jantralkampa',
+  description: 'Government services and schemes available at Jantralkampa Panchayat.',
 };
 
 async function getServices() {

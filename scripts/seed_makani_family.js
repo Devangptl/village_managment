@@ -2,10 +2,10 @@ const mysql = require('mysql2/promise');
 
 async function seedMakaniFamily() {
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'admin@123',
-    database: process.env.DB_NAME || 'village-management',
+     host: process.env.DB_HOST || 'auth-db877.hstgr.io',
+    user: process.env.DB_USER || 'u325246037_jantralkampa',
+    password: process.env.DB_PASSWORD || '~5QD1sdQ1?',
+    database: process.env.DB_NAME || 'u325246037_jantralkampa',
     multipleStatements: true,
   });
 

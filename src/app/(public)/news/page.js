@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { query } from '@/lib/db';
 
 export const metadata = {
-  title: 'News - Green Valley Village',
-  description: 'Latest news and updates from Green Valley Village Panchayat.',
+  title: 'News - Jantralkampa',
+  description: 'Latest news and updates from Jantralkampa Panchayat.',
 };
 
 async function getNews() {

@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 
 async function seed() {
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'admin@123',
+    host: process.env.DB_HOST || 'auth-db877.hstgr.io',
+    user: process.env.DB_USER || 'u325246037_jantralkampa',
+    password: process.env.DB_PASSWORD || '~5QD1sdQ1?',
     multipleStatements: true,
   });
 
@@ -19,7 +19,7 @@ async function seed() {
   console.log('Schema created successfully.');
 
   // Use the database
-  await connection.query('USE `village-management`');
+  await connection.query('USE `u325246037_jantralkampa`');
 
   // Seed admin user
   const passwordHash = await bcrypt.hash('admin123', 10);
@@ -33,7 +33,7 @@ async function seed() {
   const newsData = [
     ['New Road Construction Approved', 'new-road-construction-approved', 'The village panchayat has approved the construction of a new road connecting the east and west sectors of the village. Work will begin next month.', 'Road construction project approved for east-west connectivity.', null, true],
     ['Annual Health Camp This Weekend', 'annual-health-camp-this-weekend', 'Free health checkups and vaccinations will be available at the village community center this Saturday from 9 AM to 5 PM.', 'Free health camp at community center this Saturday.', null, true],
-    ['Village Wins State Clean Village Award', 'village-wins-clean-award', 'Our village has been recognized with the State Clean Village Award for maintaining exceptional cleanliness and waste management practices.', 'Green Valley wins prestigious state-level cleanliness award.', null, true],
+    ['Village Wins State Clean Village Award', 'village-wins-clean-award', 'Our village has been recognized with the State Clean Village Award for maintaining exceptional cleanliness and waste management practices.', 'Jantralkampa wins prestigious state-level cleanliness award.', null, true],
   ];
   for (const n of newsData) {
     await connection.query(
@@ -76,10 +76,10 @@ async function seed() {
 
   // Seed sample directory
   const directoryData = [
-    ['Village Health Center', 'Healthcare', '+91 20 1111 2222', 'health@village.gov.in', 'Main Road, Green Valley', 'Primary health center with basic medical facilities.', true],
-    ['Green Valley School', 'Education', '+91 20 3333 4444', 'school@greenvalley.edu', 'School Lane, Sector 2', 'Government school providing education from Class 1 to 10.', true],
+    ['Village Health Center', 'Healthcare', '+91 20 1111 2222', 'health@village.gov.in', 'Main Road, Jantralkampa', 'Primary health center with basic medical facilities.', true],
+    ['Jantralkampa School', 'Education', '+91 20 3333 4444', 'school@greenvalley.edu', 'School Lane, Sector 2', 'Government school providing education from Class 1 to 10.', true],
     ['Farmers Cooperative', 'Agriculture', '+91 20 5555 6666', 'coop@farmers.org', 'Market Area', 'Agricultural cooperative providing seeds, fertilizers, and market access.', true],
-    ['Post Office', 'Government', '+91 20 7777 8888', null, 'Post Office Road', 'India Post branch office serving Green Valley village.', true],
+    ['Post Office', 'Government', '+91 20 7777 8888', null, 'Post Office Road', 'India Post branch office serving Jantralkampa.', true],
   ];
   for (const d of directoryData) {
     await connection.query(

@@ -1,6 +1,6 @@
 -- Village Management Database Schema
-CREATE DATABASE IF NOT EXISTS `village-management`;
-USE `village-management`;
+CREATE DATABASE IF NOT EXISTS `u325246037_jantralkampa`;
+USE `u325246037_jantralkampa`;
 
 -- Admin users
 CREATE TABLE IF NOT EXISTS admins (
@@ -117,11 +117,11 @@ CREATE TABLE IF NOT EXISTS village_data (
 
 -- Seed default village data
 INSERT IGNORE INTO village_data (data_key, data_value) VALUES
-  ('village_name', 'Green Valley Village'),
+  ('village_name', 'Jantralkampa'),
   ('village_logo', ''),
   ('show_dynamic_logo', 'true'),
   ('village_description', 'A beautiful and progressive village nestled in the heart of nature, dedicated to sustainable development and community well-being.'),
-  ('village_history', 'Green Valley Village was established in 1850 and has since grown into a thriving community of over 5,000 residents. Our village is known for its rich cultural heritage, lush green landscapes, and a strong sense of community spirit.'),
+  ('village_history', 'Jantralkampa was established in 1850 and has since grown into a thriving community of over 5,000 residents. Our village is known for its rich cultural heritage, lush green landscapes, and a strong sense of community spirit.'),
   ('population', '5,200'),
   ('area', '12.5 sq km'),
   ('pincode', '411001'),
@@ -131,7 +131,7 @@ INSERT IGNORE INTO village_data (data_key, data_value) VALUES
   ('sarpanch_message', 'Welcome to our village website. We are committed to bringing transparency and digital connectivity to every household.'),
   ('village_phone', '+91 20 1234 5678'),
   ('village_email', 'contact@greenvalleyvillage.gov.in'),
-  ('village_address', 'Green Valley Village, Pune District, Maharashtra, India - 411001'),
+  ('village_address', 'Jantralkampa, Pune District, Maharashtra, India - 411001'),
   ('map_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242117.68078944388!2d73.72287834013858!3d18.524598010498498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890');
 
 -- People (Family Tree)

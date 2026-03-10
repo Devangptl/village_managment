@@ -1,8 +1,8 @@
 import { query } from '@/lib/db';
 
 export const metadata = {
-  title: 'About - Green Valley Village',
-  description: 'Learn about Green Valley Village - our history, leadership, demographics, and community values.',
+  title: 'About - Jantralkampa',
+  description: 'Learn about Jantralkampa - our history, leadership, demographics, and community values.',
 };
 
 async function getAboutData() {
@@ -43,7 +43,7 @@ export default async function AboutPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 font-['Outfit']">About Our Village</h1>
           <p className="text-emerald-100/80 text-xl max-w-2xl mx-auto">
-            Discover the rich heritage, warm community, and progressive vision of {vd.village_name || 'Green Valley Village'}.
+            Discover the rich heritage, warm community, and progressive vision of {vd.village_name || 'Jantralkampa'}.
           </p>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default async function AboutPage() {
               <div className="text-emerald-600 text-sm font-semibold uppercase tracking-wider mb-3">Our Story</div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6 font-['Outfit']">A Rich History of Community</h2>
               <p className="text-gray-600 leading-relaxed text-lg">
-                {vd.village_history || 'Green Valley Village has a rich history spanning over a century of community spirit and development.'}
+                {vd.village_history || 'Jantralkampa has a rich history spanning over a century of community spirit and development.'}
               </p>
             </div>
             <div className="relative">

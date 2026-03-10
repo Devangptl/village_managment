@@ -12,7 +12,7 @@ export default function ContactPage() {
     fetch('/api/village-data')
       .then((res) => res.json())
       .then(setVillageData)
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -39,7 +39,7 @@ export default function ContactPage() {
   };
 
   const contactInfo = [
-    { icon: '📍', label: 'Address', value: villageData.village_address || 'Green Valley Village, Pune' },
+    { icon: '📍', label: 'Address', value: villageData.village_address || 'Jantralkampa, Pune' },
     { icon: '📞', label: 'Phone', value: villageData.village_phone || '+91 20 1234 5678' },
     { icon: '📧', label: 'Email', value: villageData.village_email || 'contact@greenvalleyvillage.gov.in' },
   ];

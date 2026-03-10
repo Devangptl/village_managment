@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
   const article = await queryOne('SELECT title, excerpt FROM news WHERE slug = ?', [slug]);
   if (!article) return { title: 'Not Found' };
   return {
-    title: `${article.title} - Green Valley Village`,
+    title: `${article.title} - Jantralkampa`,
     description: article.excerpt || article.title,
   };
 }
