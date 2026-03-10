@@ -40,7 +40,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-48 lg:pb-56 w-full z-10">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-[340px] sm:pb-80 lg:pb-56 w-full z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
 
             {/* Left Content */}
@@ -61,11 +61,11 @@ export default async function HomePage() {
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed animate-fade-in-up animate-delay-200 max-w-2xl mx-auto lg:mx-0 font-light">
+              <p className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed animate-fade-in-up animate-delay-200 max-w-2xl mx-auto lg:mx-0 font-light z-20 relative">
                 {villageData.village_description || 'Experience transparent governance, seamless digital services, and a thriving connected community right at your fingertips.'}
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up animate-delay-300">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up animate-delay-300 relative z-20">
                 <Link href="/about" className="group relative px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-2xl transition-all duration-300 overflow-hidden w-full sm:w-auto text-center">
                   <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                   <span className="relative flex items-center justify-center gap-2">
@@ -146,16 +146,16 @@ export default async function HomePage() {
                   <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-${stat.color}-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                   <div className="relative flex flex-col items-start gap-2">
-                    <div className="flex w-full items-start justify-between">
-                      <div className={`w-10 h-10 rounded-xl bg-${stat.color}-500/10 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner border border-white/5`}>
+                    <div className="flex w-full items-start justify-between gap-1">
+                      <div className={`w-10 h-10 shrink-0 rounded-xl bg-${stat.color}-500/10 flex items-center justify-center text-xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner border border-white/5`}>
                         {stat.icon}
                       </div>
-                      <span className={`text-[9px] px-2 py-0.5 rounded-full bg-${stat.color}-500/20 text-${stat.color}-300 font-bold tracking-widest uppercase border border-${stat.color}-500/30 group-hover:bg-${stat.color}-500/30 transition-colors`}>
+                      <span className={`text-[9px] px-2 py-0.5 rounded-full bg-${stat.color}-500/20 text-${stat.color}-300 font-bold tracking-widest uppercase border border-${stat.color}-500/30 group-hover:bg-${stat.color}-500/30 transition-colors shrink-0 max-w-[80px] truncate block text-center`}>
                         {stat.trend}
                       </span>
                     </div>
 
-                    <div className="mt-2 text-xl sm:text-2xl font-black font-['Outfit'] tracking-tight bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent group-hover:from-emerald-300 group-hover:to-teal-100 transition-colors duration-300">
+                    <div className="mt-2 text-xl sm:text-2xl font-black font-['Outfit'] tracking-tight break-words line-clamp-2 w-full bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent group-hover:from-emerald-300 group-hover:to-teal-100 transition-colors duration-300">
                       {stat.value}
                     </div>
 
