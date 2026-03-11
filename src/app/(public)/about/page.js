@@ -21,10 +21,10 @@ export default async function AboutPage() {
   const vd = await getAboutData();
 
   const stats = [
-    { icon: '👥', label: 'Population', value: vd.population || '5,200', color: 'from-blue-500 to-cyan-500' },
-    { icon: '🗺️', label: 'Area', value: vd.area || '12.5 sq km', color: 'from-emerald-500 to-teal-500' },
-    { icon: '📍', label: 'Pin Code', value: vd.pincode || '411001', color: 'from-amber-400 to-orange-500' },
-    { icon: '🏛️', label: 'District', value: vd.district || 'Pune', color: 'from-purple-500 to-indigo-500' },
+    { icon: '👥', label: 'Population', value: vd.population, color: 'from-blue-500 to-cyan-500' },
+    { icon: '🗺️', label: 'Area', value: vd.area, color: 'from-emerald-500 to-teal-500' },
+    { icon: '📍', label: 'Pin Code', value: vd.pincode, color: 'from-amber-400 to-orange-500' },
+    { icon: '🏛️', label: 'District', value: vd.district, color: 'from-purple-500 to-indigo-500' },
   ];
 
   return (

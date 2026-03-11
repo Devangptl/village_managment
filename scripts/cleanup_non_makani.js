@@ -2,10 +2,10 @@ const mysql = require('mysql2/promise');
 
 async function cleanupNonMakani() {
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'admin@123',
-    database: process.env.DB_NAME || 'village-management',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   });
 
   console.log('Connected to MySQL.');

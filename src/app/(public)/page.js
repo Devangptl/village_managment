@@ -134,10 +134,10 @@ export default async function HomePage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {[
-                { label: 'Total Population', value: villageData.population || '5,200', icon: '👥', trend: 'Growing', color: 'emerald' },
-                { label: 'Village Area', value: villageData.area || '12.5 sq km', icon: '🗺️', trend: 'Stable', color: 'blue' },
-                { label: 'District', value: villageData.district || 'Pune', icon: '📍', trend: 'HQ', color: 'indigo' },
-                { label: 'State', value: villageData.state || 'Maharashtra', icon: '🏛️', trend: 'IN', color: 'teal' },
+                { label: 'Total Population', value: villageData.population, icon: '👥', trend: 'Growing', color: 'emerald' },
+                { label: 'Village Area', value: villageData.area, icon: '🗺️', trend: 'Stable', color: 'blue' },
+                { label: 'District', value: villageData.district, icon: '📍', trend: 'HQ', color: 'indigo' },
+                { label: 'State', value: villageData.state, icon: '🏛️', trend: 'IN', color: 'teal' },
               ].map((stat, i) => (
                 <div key={stat.label}
                   className="relative group rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-4 sm:p-5 shadow-xl hover:shadow-[0_8px_30px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition-transform duration-500 overflow-hidden"
