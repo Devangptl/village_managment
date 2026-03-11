@@ -9,6 +9,7 @@ async function getHomeData() {
       query('SELECT * FROM events WHERE is_published = 1 ORDER BY event_date ASC LIMIT 3'),
       query('SELECT * FROM village_data'),
     ]);
+    console.log({villageData});
     const vd = {};
     villageData.forEach((row) => { vd[row.data_key] = row.data_value; });
     return { announcements, news, events, villageData: vd };
