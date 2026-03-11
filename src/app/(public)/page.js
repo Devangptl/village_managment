@@ -28,6 +28,7 @@ const quickLinks = [
 
 export default async function HomePage() {
   const { announcements, news, events, villageData } = await getHomeData();
+console.log({villageData});
 
   return (
     <>
