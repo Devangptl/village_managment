@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
   try {
@@ -25,21 +31,32 @@ export async function POST(request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename
-    const ext = path.extname(file.name) || '.jpg';
-    const filename = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}${ext}`;
+    // Convert buffer to base64 to send to Cloudinary
+    const base64Data = buffer.toString('base64');
+    const fileUri = `data:${file.type};base64,${base64Data}`;
 
-    // Ensure uploads directory exists
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-    await mkdir(uploadDir, { recursive: true });
+    // Upload to Cloudinary
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload(
+        fileUri,
+        {
+          folder: 'village_management', // Optional: organized folder in Cloudinary
+          resource_type: 'auto',
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+    });
 
-    // Save file
-    const filepath = path.join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-
-    const url = `/uploads/${filename}`;
-    return NextResponse.json({ url, filename }, { status: 201 });
+    // Return the URL and filename matching the original API shape
+    return NextResponse.json(
+      { url: result.secure_url, filename: result.public_id },
+      { status: 201 }
+    );
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    console.error('Cloudinary upload error:', err);
+    return NextResponse.json({ error: err.message || 'Upload failed' }, { status: 500 });
   }
 }
