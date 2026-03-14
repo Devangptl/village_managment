@@ -23,8 +23,8 @@ const footerLinks = [
     title: 'Contact',
     links: [
       { href: '/contact', label: 'Contact Us' },
-      { href: 'tel:+912012345678', label: '+91 20 1234 5678' },
-      { href: 'mailto:contact@greenvalleyvillage.gov.in', label: 'Email Us' },
+      // { href: 'tel:+912012345678', label: '+91 20 1234 5678' },
+      // { href: 'mailto:contact@greenvalleyvillage.gov.in', label: 'Email Us' },
     ],
   },
 ];
@@ -36,30 +36,51 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                🏡
+            <Link href="/" className="flex items-center gap-3 group pb-2">
+              <div className="logo-flow-container">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full from-emerald-400 to-teal-600 flex items-center justify-center text-white font-bold text-lg shadow-md transition-all duration-500 border-2 border-white/20 overflow-hidden">
+                  <img
+                    src={"/images/logo.png"}
+                    alt={'Jantralkampa'}
+                    className="w-full"
+                  />
+                </div>
               </div>
-              <div>
-                <span className="font-bold text-lg font-['Outfit']">Jantralkampa</span>
-                <span className="block text-[10px] font-medium tracking-widest uppercase text-emerald-400">
-                  Village Panchayat
+              <div className="flex flex-col justify-center">
+                <span className={`font-extrabold text-lg lg:text-xl tracking-tight font-['Outfit'] transition-colors duration-300`}>
+                  {'Jantralkampa'}
                 </span>
               </div>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Dedicated to sustainable development, transparency, and the well-being of every resident.
-            </p>
+            </Link>
+
             <div className="flex gap-3 mt-6">
-              {['facebook', 'twitter', 'instagram'].map((social) => (
+              {[
+                {
+                  href: 'https://www.instagram.com/jantralkampa?igsh=MTkydXRwamIwNng2Mw==',
+                  label: 'Instagram',
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                  ),
+                  color: 'hover:text-pink-500 hover:bg-pink-500/10'
+                },
+                {
+                  href: 'https://www.youtube.com/@jantralKampaofficial',
+                  label: 'YouTube',
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2 103.8 103.8 0 0 1 15 0 2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2 103.8 103.8 0 0 1-15 0 2 2 0 0 1-2-2z" /><path d="m10 15 5-3-5-3z" /></svg>
+                  ),
+                  color: 'hover:text-red-500 hover:bg-red-500/10'
+                }
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
-                  className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-emerald-600 transition-colors text-sm"
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-8 h-8 rounded-full bg-gray-800/50 flex items-center justify-center text-gray-400 transition-all duration-300 border border-gray-700/50 ${social.color} hover:scale-110 hover:border-current shadow-lg shadow-black/20`}
+                  aria-label={social.label}
                 >
-                  {social === 'facebook' && 'f'}
-                  {social === 'twitter' && '𝕏'}
-                  {social === 'instagram' && '📷'}
+                  {social.icon}
                 </a>
               ))}
             </div>
@@ -90,7 +111,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Jantralkampa Panchayat. All rights reserved.
+            © {new Date().getFullYear()} Jantralkampa. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/admin/login" className="text-gray-500 hover:text-emerald-400 transition-colors">
