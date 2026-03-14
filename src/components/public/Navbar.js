@@ -116,10 +116,10 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`lg:hidden absolute top-[calc(100%+0.5rem)] left-4 right-4 transition-all duration-500 overflow-hidden rounded-3xl ${isOpen ? 'max-h-[500px] opacity-100 shadow-[0_20px_40px_rgba(0,0,0,0.1)] border border-white/40' : 'max-h-0 opacity-0 border-transparent shadow-none'
+        className={`lg:hidden absolute top-[calc(100%+0.5rem)] left-4 right-4 transition-all duration-500 overflow-hidden rounded-3xl ${isOpen ? 'max-h-[500px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] ' : 'max-h-0  border-transparent shadow-none'
           }`}
       >
-        <div className="bg-white/95 backdrop-blur-xl px-2 py-3 space-y-1">
+        <div className="bg-white/60 backdrop-blur-sm px-2 py-3 space-y-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
