@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { query } from '@/lib/db';
+import { getBaseUrl } from '@/lib/api';
 
 export const metadata = {
   title: 'News - Jantralkampa',
@@ -8,8 +8,13 @@ export const metadata = {
 
 async function getNews() {
   try {
-    return await query('SELECT * FROM news WHERE is_published = 1 ORDER BY created_at DESC');
-  } catch {
+    const res = await fetch(`${getBaseUrl()}/api/news`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching news:", error);
     return [];
   }
 }

@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { getBaseUrl } from '@/lib/api';
 import Link from 'next/link';
 
 export const metadata = {
@@ -8,11 +8,14 @@ export const metadata = {
 
 async function getAboutData() {
   try {
-    const rows = await query('SELECT * FROM village_data');
-    const vd = {};
-    rows.forEach((r) => { vd[r.data_key] = r.data_value; });
-    return vd;
-  } catch {
+    const res = await fetch(`${getBaseUrl()}/api/home`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) return {};
+    const data = await res.json();
+    return data.villageData || {};
+  } catch (error) {
+    console.error("Error fetching about data:", error);
     return {};
   }
 }

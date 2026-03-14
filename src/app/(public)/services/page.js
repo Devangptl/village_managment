@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { getBaseUrl } from '@/lib/api';
 
 export const metadata = {
   title: 'Services - Jantralkampa',
@@ -7,8 +7,13 @@ export const metadata = {
 
 async function getServices() {
   try {
-    return await query('SELECT * FROM services WHERE is_active = 1 ORDER BY department, name');
-  } catch {
+    const res = await fetch(`${getBaseUrl()}/api/services`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching services:", error);
     return [];
   }
 }

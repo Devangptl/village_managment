@@ -1,19 +1,25 @@
 import Link from 'next/link';
-import { query } from '@/lib/db';
+import { getBaseUrl } from '@/lib/api';
 
 async function getHomeData() {
   try {
-    const [announcements, news, events, villageData] = await Promise.all([
-      query('SELECT * FROM announcements WHERE is_active = 1 ORDER BY priority DESC, created_at DESC LIMIT 5'),
-      query('SELECT * FROM news WHERE is_published = 1 ORDER BY created_at DESC LIMIT 3'),
-      query('SELECT * FROM events WHERE is_published = 1 ORDER BY event_date ASC LIMIT 3'),
-      query('SELECT * FROM village_data'),
-    ]);
-    console.log({villageData});
-    const vd = {};
-    villageData.forEach((row) => { vd[row.data_key] = row.data_value; });
-    return { announcements, news, events, villageData: vd };
-  } catch {
+    const res = await fetch(`${getBaseUrl()}/api/home`, {
+      cache: 'no-store'
+    });
+    
+    if (!res.ok) {
+      throw new Error('Failed to fetch home data');
+    }
+    
+    const data = await res.json();
+    return {
+      announcements: data.announcements || [],
+      news: data.news || [],
+      events: data.events || [],
+      villageData: data.villageData || {}
+    };
+  } catch (error) {
+    console.error("API Fetch ERROR in getHomeData:", error);
     return { announcements: [], news: [], events: [], villageData: {} };
   }
 }

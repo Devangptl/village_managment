@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { getBaseUrl } from '@/lib/api';
 
 export const metadata = {
   title: 'Events - Jantralkampa',
@@ -7,8 +7,13 @@ export const metadata = {
 
 async function getEvents() {
   try {
-    return await query('SELECT * FROM events WHERE is_published = 1 ORDER BY event_date DESC');
-  } catch {
+    const res = await fetch(`${getBaseUrl()}/api/events`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching events:", error);
     return [];
   }
 }
