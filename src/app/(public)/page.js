@@ -74,15 +74,17 @@ const quickLinks = [
                 <span className="relative inline-block w-full lg:w-auto mt-2 lg:mt-0">
                   <span className="absolute -inset-2 bg-gradient-to-r from-emerald-500 to-teal-400 blur-2xl opacity-20" />
                   <span className="relative bg-gradient-to-br from-emerald-300 via-white to-teal-200 bg-clip-text text-transparent">
-                    {loading ? <span className="inline-block w-64 h-16 sm:h-20 lg:h-24 bg-slate-700/50 rounded-2xl animate-pulse align-middle"></span> : (villageData.village_name || 'Jantralkampa')}
+                    {/* {loading ? <span className="inline-block w-64 h-16 sm:h-20 lg:h-24 bg-slate-700/50 rounded-2xl animate-pulse align-middle"></span> : (villageData.village_name || 'Jantralkampa')} */}
+                    Jantralkampa
                   </span>
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed animate-fade-in-up animate-delay-200 max-w-2xl mx-auto lg:mx-0 font-light z-20 relative">
-                {loading ? (
+                {/* {loading ? (
                    <span className="inline-block w-full h-20 bg-slate-800/50 rounded-xl animate-pulse"></span>
-                ) : (villageData.village_description || 'Experience transparent governance, seamless digital services, and a thriving connected community right at your fingertips.')}
+                ) : (villageData.village_description || 'Experience transparent governance, seamless digital services, and a thriving connected community right at your fingertips.')} */}
+                A beautiful and progressive village nestled in the heart of nature, dedicated to sustainable development and community well-being.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up animate-delay-300 relative z-20">
