@@ -768,6 +768,58 @@
   .animate-bounce-slow {
     animation: bounceSlow 4s ease-in-out infinite;
   }
+
+  /* Logo Rounded Circle Flow Animation */
+  @keyframes rotate-flow {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .logo-flow-container {
+    position: relative;
+    border-radius: 9999px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+
+  .logo-flow-container::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg,
+        transparent 0deg,
+        #10b981 180deg,
+        transparent 360deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+  }
+
+  .group:hover .logo-flow-container {
+    background: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .group:hover .logo-flow-container::before {
+    opacity: 1;
+    animation: rotate-flow 2s linear infinite;
+  }
+
+  /* Ensure the logo itself stays on top */
+  .logo-flow-container>* {
+    position: relative;
+    z-index: 10;
+  }
 }
 
 /* ========== KEYFRAMES (outside layers — they are global) ========== */
@@ -820,6 +872,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }

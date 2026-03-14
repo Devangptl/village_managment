@@ -49,21 +49,23 @@ export default function Navbar() {
         >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group pl-2">
-            {villageData?.village_logo && villageData?.show_dynamic_logo !== 'false' ? (
-              <img
-                src={villageData.village_logo}
-                alt={villageData.village_name || 'Village Logo'}
-                className="w-10 h-10 lg:w-11 lg:h-11 object-contain rounded-full shadow-md group-hover:scale-110 transition-transform duration-500 bg-white/90 p-1 border border-white/50"
-              />
-            ) : (
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full from-emerald-400 to-teal-600 flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border-2 border-white/20">
+            <div className="logo-flow-container">
+              {villageData?.village_logo && villageData?.show_dynamic_logo !== 'false' ? (
                 <img
-                  src={"/images/logo.png"}
-                  alt={'Jantralkampa'}
-                  className="w-full"
+                  src={villageData.village_logo}
+                  alt={villageData.village_name || 'Village Logo'}
+                  className="w-10 h-10 lg:w-11 lg:h-11 object-contain rounded-full shadow-md transition-all duration-500 bg-white/90 p-1 border border-white/50"
                 />
-              </div>
-            )}
+              ) : (
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full from-emerald-400 to-teal-600 flex items-center justify-center text-white font-bold text-lg shadow-md transition-all duration-500 border-2 border-white/20 overflow-hidden">
+                  <img
+                    src={"/images/logo.png"}
+                    alt={'Jantralkampa'}
+                    className="w-full"
+                  />
+                </div>
+              )}
+            </div>
             <div className="flex flex-col justify-center">
               <span className={`font-extrabold text-lg lg:text-xl tracking-tight font-['Outfit'] transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}>
                 {villageData?.village_name || 'Jantralkampa'}
