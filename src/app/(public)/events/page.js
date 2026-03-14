@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { EventCardSkeleton } from '@/components/Skeletons';
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -57,8 +58,8 @@ export default function EventsPage() {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-20">
-              <h3 className="text-xl font-semibold text-gray-700">Loading events...</h3>
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => <EventCardSkeleton key={i} />)}
             </div>
           ) : events.length === 0 ? (
             <div className="text-center py-20">

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { HomeStatCardSkeleton, HomeNewsCardSkeleton, HomeEventCardSkeleton, AnnouncementSkeleton } from '@/components/Skeletons';
 
 export default function HomePage() {
   const [data, setData] = useState({
@@ -73,13 +74,15 @@ const quickLinks = [
                 <span className="relative inline-block w-full lg:w-auto mt-2 lg:mt-0">
                   <span className="absolute -inset-2 bg-gradient-to-r from-emerald-500 to-teal-400 blur-2xl opacity-20" />
                   <span className="relative bg-gradient-to-br from-emerald-300 via-white to-teal-200 bg-clip-text text-transparent">
-                    {villageData.village_name || 'Jantralkampa'}
+                    {loading ? <span className="inline-block w-64 h-16 sm:h-20 lg:h-24 bg-slate-700/50 rounded-2xl animate-pulse align-middle"></span> : (villageData.village_name || 'Jantralkampa')}
                   </span>
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed animate-fade-in-up animate-delay-200 max-w-2xl mx-auto lg:mx-0 font-light z-20 relative">
-                {villageData.village_description || 'Experience transparent governance, seamless digital services, and a thriving connected community right at your fingertips.'}
+                {loading ? (
+                   <span className="inline-block w-full h-20 bg-slate-800/50 rounded-xl animate-pulse"></span>
+                ) : (villageData.village_description || 'Experience transparent governance, seamless digital services, and a thriving connected community right at your fingertips.')}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up animate-delay-300 relative z-20">
@@ -150,12 +153,15 @@ const quickLinks = [
         <div className="absolute bottom-[20px] left-0 right-0 z-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              {[
-                { label: 'Total Population', value: villageData.population, icon: '👥', trend: 'Growing', color: 'emerald' },
-                { label: 'Village Area', value: villageData.area, icon: '🗺️', trend: 'Stable', color: 'blue' },
-                { label: 'District', value: villageData.district, icon: '📍', trend: 'HQ', color: 'indigo' },
-                { label: 'State', value: villageData.state, icon: '🏛️', trend: 'IN', color: 'teal' },
-              ].map((stat, i) => (
+              {loading ? (
+                [1, 2, 3, 4].map((i) => <HomeStatCardSkeleton key={i} />)
+              ) : (
+                [
+                  { label: 'Total Population', value: villageData.population, icon: '👥', trend: 'Growing', color: 'emerald' },
+                  { label: 'Village Area', value: villageData.area, icon: '🗺️', trend: 'Stable', color: 'blue' },
+                  { label: 'District', value: villageData.district, icon: '📍', trend: 'HQ', color: 'indigo' },
+                  { label: 'State', value: villageData.state, icon: '🏛️', trend: 'IN', color: 'teal' },
+                ].map((stat, i) => (
                 <div key={stat.label}
                   className="relative group rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-4 sm:p-5 shadow-xl hover:shadow-[0_8px_30px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition-transform duration-500 overflow-hidden"
                   style={{ animationDelay: `${i * 100}ms` }}
@@ -181,14 +187,16 @@ const quickLinks = [
                     </div>
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Announcements Ticker */}
-      {announcements.length > 0 && (
+      {loading ? (
+        <AnnouncementSkeleton />
+      ) : announcements.length > 0 && (
         <div className="bg-emerald-950 text-emerald-50 py-2.5 overflow-hidden border-b border-emerald-900/50 shadow-inner relative group">
           <div className="flex items-center">
             {/* Label */}
@@ -304,7 +312,7 @@ const quickLinks = [
       )}
 
       {/* Latest News */}
-      {news.length > 0 && (
+      {(loading || news.length > 0) && (
         <section className="py-24 bg-white relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
@@ -318,8 +326,11 @@ const quickLinks = [
               </Link>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
-              {news.map((item) => (
-                <Link key={item.id} href={`/news/${item.slug}`} className="group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 flex flex-col">
+              {loading ? (
+                [1, 2, 3].map((i) => <HomeNewsCardSkeleton key={i} />)
+              ) : (
+                news.map((item) => (
+                  <Link key={item.id} href={`/news/${item.slug}`} className="group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 flex flex-col">
                   <div className="h-56 bg-gradient-to-br from-emerald-50 to-teal-50 relative overflow-hidden flex items-center justify-center">
                     <div className="absolute inset-0 flex items-center justify-center text-7xl transform group-hover:scale-110 transition-transform duration-500 opacity-80">
                       📰
@@ -341,14 +352,14 @@ const quickLinks = [
                     </div>
                   </div>
                 </Link>
-              ))}
+              )))}
             </div>
           </div>
         </section>
       )}
 
       {/* Upcoming Events */}
-      {events.length > 0 && (
+      {(loading || events.length > 0) && (
         <section className="py-24 bg-gray-50 relative">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/shattered-island.png')] opacity-30 pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -363,8 +374,11 @@ const quickLinks = [
               </Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events.map((event) => {
-                const eventDate = new Date(event.event_date);
+              {loading ? (
+                [1, 2, 3].map((i) => <HomeEventCardSkeleton key={i} />)
+              ) : (
+                events.map((event) => {
+                  const eventDate = new Date(event.event_date);
                 return (
                   <div key={event.id} className="group bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
                     <div className="flex items-start gap-6">
@@ -394,7 +408,7 @@ const quickLinks = [
                     </div>
                   </div>
                 );
-              })}
+              }))}
             </div>
           </div>
         </section>

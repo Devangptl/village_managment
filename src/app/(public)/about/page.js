@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { AboutStatCardSkeleton } from '@/components/Skeletons';
 
 export default function AboutPage() {
   const [vd, setVd] = useState({});
@@ -33,7 +34,7 @@ export default function AboutPage() {
       <section className="gradient-hero pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 font-['Outfit']">
-            About {vd.village_name || 'Jantralkampa'}
+            About {loading ? <span className="inline-block w-48 h-10 bg-emerald-700/50 rounded animate-pulse align-middle"></span> : (vd.village_name || 'Jantralkampa')}
           </h1>
           <p className="text-emerald-100/80 text-xl max-w-2xl mx-auto font-light leading-relaxed">
             Discover the rich heritage, warm community, and progressive vision of our vibrant village.
@@ -45,24 +46,28 @@ export default function AboutPage() {
       <section className="relative -mt-12 z-20 pb-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {stats.map((stat, idx) => (
-              <div
-                key={stat.label}
-                className="group relative bg-white/60 backdrop-blur-xl p-5 rounded-[1.25rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/50 hover:bg-white/80 hover:shadow-lg hover:border-white hover:-translate-y-1 transition-all duration-300 overflow-hidden flex items-center gap-4"
-              >
-                <div className={`w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br ${stat.color} p-[2px] shadow-sm transform group-hover:rotate-6 group-hover:scale-110 transition-all duration-300`}>
-                  <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center text-xl">
-                    {stat.icon}
+            {loading ? (
+              [1, 2, 3, 4].map((i) => <AboutStatCardSkeleton key={i} />)
+            ) : (
+              stats.map((stat, idx) => (
+                <div
+                  key={stat.label}
+                  className="group relative bg-white/60 backdrop-blur-xl p-5 rounded-[1.25rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/50 hover:bg-white/80 hover:shadow-lg hover:border-white hover:-translate-y-1 transition-all duration-300 overflow-hidden flex items-center gap-4"
+                >
+                  <div className={`w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br ${stat.color} p-[2px] shadow-sm transform group-hover:rotate-6 group-hover:scale-110 transition-all duration-300`}>
+                    <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center text-xl">
+                      {stat.icon}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-slate-800 font-['Outfit'] tracking-tight group-hover:text-emerald-700 transition-colors drop-shadow-sm">
+                      {stat.value}
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</div>
                   </div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-slate-800 font-['Outfit'] tracking-tight group-hover:text-emerald-700 transition-colors drop-shadow-sm">
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</div>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -105,14 +110,23 @@ export default function AboutPage() {
                 </h2>
               </div>
 
-              <div className="space-y-6 text-slate-600 text-lg md:text-xl font-light leading-relaxed">
-                <p>
-                  {vd.village_history || 'Jantralkampa has a rich history spanning over a century of community spirit and development. Nestled in the heart of nature, our village has grown from a humble settlement into a thriving, self-sustaining community.'}
-                </p>
-                <p>
-                  Generations have contributed to preserving our vibrant culture while embracing modern advancements, making us a shining example of harmonious living. Our commitment to sustainable growth ensures a bright future for generations to come.
-                </p>
-              </div>
+              {loading ? (
+                <div className="space-y-4 animate-pulse">
+                  <div className="h-5 bg-slate-200 rounded w-full"></div>
+                  <div className="h-5 bg-slate-200 rounded w-11/12"></div>
+                  <div className="h-5 bg-slate-200 rounded w-full"></div>
+                  <div className="h-5 bg-slate-200 rounded w-3/4 pt-4"></div>
+                </div>
+              ) : (
+                <div className="space-y-6 text-slate-600 text-lg md:text-xl font-light leading-relaxed">
+                  <p>
+                    {vd.village_history || 'Jantralkampa has a rich history spanning over a century of community spirit and development. Nestled in the heart of nature, our village has grown from a humble settlement into a thriving, self-sustaining community.'}
+                  </p>
+                  <p>
+                    Generations have contributed to preserving our vibrant culture while embracing modern advancements, making us a shining example of harmonious living. Our commitment to sustainable growth ensures a bright future for generations to come.
+                  </p>
+                </div>
+              )}
 
               <div className="pt-6 border-t border-slate-100">
                 <div className="flex items-center gap-4">

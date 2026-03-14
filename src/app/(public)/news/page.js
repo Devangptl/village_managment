@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { NewsCardSkeleton } from '@/components/Skeletons';
 
 export default function NewsPage() {
   const [news, setNews] = useState([]);
@@ -33,8 +34,8 @@ export default function NewsPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="text-center py-20">
-              <h3 className="text-xl font-semibold text-gray-700">Loading news...</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => <NewsCardSkeleton key={i} />)}
             </div>
           ) : news.length === 0 ? (
             <div className="text-center py-20">

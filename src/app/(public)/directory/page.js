@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { DirectoryCardSkeleton } from '@/components/Skeletons';
 
 export default function DirectoryPage() {
   const [entries, setEntries] = useState([]);
@@ -71,7 +72,9 @@ export default function DirectoryPage() {
           </div>
 
           {loading ? (
-            <div className="flex justify-center py-20"><div className="spinner" /></div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => <DirectoryCardSkeleton key={i} />)}
+            </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">📖</div>
