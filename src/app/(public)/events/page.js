@@ -1,25 +1,24 @@
-import { getBaseUrl } from '@/lib/api';
+'use client';
 
-export const metadata = {
-  title: 'Events - Jantralkampa',
-  description: 'Upcoming and past events in Jantralkampa.',
-};
+import { useState, useEffect } from 'react';
 
-async function getEvents() {
-  try {
-    const res = await fetch(`${getBaseUrl()}/api/events`, {
-      cache: 'no-store'
-    });
-    if (!res.ok) return [];
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching events:", error);
-    return [];
-  }
-}
+export default function EventsPage() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function EventsPage() {
-  const events = await getEvents();
+  useEffect(() => {
+    fetch('/api/events')
+      .then((res) => res.json())
+      .then((data) => {
+        setEvents(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching events:", error);
+        setLoading(false);
+      });
+  }, []);
+
   const today = new Date().toISOString().split('T')[0];
   const upcoming = events.filter((e) => e.event_date >= today);
   const past = events.filter((e) => e.event_date < today);
@@ -57,7 +56,11 @@ export default async function EventsPage() {
 
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {events.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-20">
+              <h3 className="text-xl font-semibold text-gray-700">Loading events...</h3>
+            </div>
+          ) : events.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">📅</div>
               <h3 className="text-xl font-semibold text-gray-700">No events scheduled</h3>

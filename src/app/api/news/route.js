@@ -4,6 +4,11 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const rows = await query('SELECT * FROM news ORDER BY created_at DESC');
+    console.log("=====================================");
+    console.log({ rows });
+    console.log("=====================================");
+
+
     return NextResponse.json(rows);
   } catch {
     return NextResponse.json([], { status: 500 });

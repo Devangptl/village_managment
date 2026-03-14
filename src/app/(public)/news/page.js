@@ -1,26 +1,25 @@
+'use client';
+
 import Link from 'next/link';
-import { getBaseUrl } from '@/lib/api';
+import { useState, useEffect } from 'react';
 
-export const metadata = {
-  title: 'News - Jantralkampa',
-  description: 'Latest news and updates from Jantralkampa Panchayat.',
-};
+export default function NewsPage() {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-async function getNews() {
-  try {
-    const res = await fetch(`${getBaseUrl()}/api/news`, {
-      cache: 'no-store'
-    });
-    if (!res.ok) return [];
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching news:", error);
-    return [];
-  }
-}
-
-export default async function NewsPage() {
-  const news = await getNews();
+  useEffect(() => {
+    fetch('/api/news')
+      .then((res) => res.json())
+      .then((data) => {
+        // If data is an array, set it; otherwise maybe handle errors
+        setNews(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch news', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -33,7 +32,11 @@ export default async function NewsPage() {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {news.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-20">
+              <h3 className="text-xl font-semibold text-gray-700">Loading news...</h3>
+            </div>
+          ) : news.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">📰</div>
               <h3 className="text-xl font-semibold text-gray-700">No news articles yet</h3>

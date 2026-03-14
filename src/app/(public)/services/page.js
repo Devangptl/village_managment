@@ -1,25 +1,23 @@
-import { getBaseUrl } from '@/lib/api';
+'use client';
 
-export const metadata = {
-  title: 'Services - Jantralkampa',
-  description: 'Government services and schemes available at Jantralkampa Panchayat.',
-};
+import { useState, useEffect } from 'react';
 
-async function getServices() {
-  try {
-    const res = await fetch(`${getBaseUrl()}/api/services`, {
-      cache: 'no-store'
-    });
-    if (!res.ok) return [];
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching services:", error);
-    return [];
-  }
-}
+export default function ServicesPage() {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function ServicesPage() {
-  const services = await getServices();
+  useEffect(() => {
+    fetch('/api/services')
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching services:", error);
+        setLoading(false);
+      });
+  }, []);
 
   // Group by department
   const departments = {};
@@ -40,7 +38,11 @@ export default async function ServicesPage() {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {services.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-20">
+              <h3 className="text-xl font-semibold text-gray-700">Loading services...</h3>
+            </div>
+          ) : services.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">🏛️</div>
               <h3 className="text-xl font-semibold text-gray-700">No services listed yet</h3>

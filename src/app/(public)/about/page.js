@@ -1,27 +1,24 @@
-import { getBaseUrl } from '@/lib/api';
+'use client';
+
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-export const metadata = {
-  title: 'About - Jantralkampa',
-  description: 'Learn about Jantralkampa - our history, demographics, and community values.',
-};
+export default function AboutPage() {
+  const [vd, setVd] = useState({});
+  const [loading, setLoading] = useState(true);
 
-async function getAboutData() {
-  try {
-    const res = await fetch(`${getBaseUrl()}/api/home`, {
-      cache: 'no-store'
-    });
-    if (!res.ok) return {};
-    const data = await res.json();
-    return data.villageData || {};
-  } catch (error) {
-    console.error("Error fetching about data:", error);
-    return {};
-  }
-}
-
-export default async function AboutPage() {
-  const vd = await getAboutData();
+  useEffect(() => {
+    fetch('/api/home')
+      .then((res) => res.json())
+      .then((data) => {
+        setVd(data.villageData || {});
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching about data:", error);
+        setLoading(false);
+      });
+  }, []);
 
   const stats = [
     { icon: '👥', label: 'Population', value: vd.population, color: 'from-blue-500 to-cyan-500' },

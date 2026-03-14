@@ -1,28 +1,39 @@
-import Link from 'next/link';
-import { getBaseUrl } from '@/lib/api';
+'use client';
 
-async function getHomeData() {
-  try {
-    const res = await fetch(`${getBaseUrl()}/api/home`, {
-      cache: 'no-store'
-    });
-    
-    if (!res.ok) {
-      throw new Error('Failed to fetch home data');
-    }
-    
-    const data = await res.json();
-    return {
-      announcements: data.announcements || [],
-      news: data.news || [],
-      events: data.events || [],
-      villageData: data.villageData || {}
-    };
-  } catch (error) {
-    console.error("API Fetch ERROR in getHomeData:", error);
-    return { announcements: [], news: [], events: [], villageData: {} };
-  }
-}
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+
+export default function HomePage() {
+  const [data, setData] = useState({
+    announcements: [],
+    news: [],
+    events: [],
+    villageData: {},
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/home')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch home data');
+        return res.json();
+      })
+      .then((json) => {
+        setData({
+          announcements: json.announcements || [],
+          news: json.news || [],
+          events: json.events || [],
+          villageData: json.villageData || {},
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("API Fetch ERROR in getHomeData:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  const { announcements, news, events, villageData } = data;
 
 const quickLinks = [
   { href: '/services', icon: '🏛️', title: 'Services', desc: 'Government services & certificates' },
@@ -33,9 +44,7 @@ const quickLinks = [
   { href: '/gallery', icon: '📸', title: 'Gallery', desc: 'Village photo gallery' },
 ];
 
-export default async function HomePage() {
-  const { announcements, news, events, villageData } = await getHomeData();
-console.log({villageData});
+
 
   return (
     <>
