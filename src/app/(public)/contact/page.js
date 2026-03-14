@@ -39,9 +39,9 @@ export default function ContactPage() {
   };
 
   const contactInfo = [
-    { icon: '📍', label: 'Address', value: villageData.village_address || 'Jantralkampa, Pune' },
-    { icon: '📞', label: 'Phone', value: villageData.village_phone || '+91 20 1234 5678' },
-    { icon: '📧', label: 'Email', value: villageData.village_email || 'contact@greenvalleyvillage.gov.in' },
+    { icon: '📍', label: 'Address', value: villageData.village_address || 'Jantralkampa, Aravalli District, Gujarat, India - 383325' },
+    { icon: '📞', label: 'Phone', value: villageData.village_phone || '' },
+    { icon: '📧', label: 'Email', value: villageData.village_email || '' },
   ];
 
   return (
